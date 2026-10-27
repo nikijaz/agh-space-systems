@@ -38,4 +38,4 @@ class UnregisteredCallbackError(CommunicationError):
         self.frame = frame
 
     def __str__(self):
-        return f'Unregistered callback for frame: {self.frame}'
+        return f"Unregistered callback for frame: {self.frame}"

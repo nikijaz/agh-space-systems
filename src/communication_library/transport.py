@@ -13,14 +13,12 @@ class TransportOptions(ABC):
 
 
 class TransportInfo(ABC):
-
     @abstractmethod
     def __dict__(self) -> dict:
         pass
 
 
 class TransportSettings(ABC):
-
     @classmethod
     @abstractmethod
     def options(cls) -> TransportOptions:
@@ -32,7 +30,6 @@ class TransportSettings(ABC):
 
 
 class Transport(ABC):
-
     @property
     @abstractmethod
     def read_timeout(self) -> float:

@@ -1,0 +1,34 @@
+[project]
+name = "agh-space-systems"
+version = "0.1.0"
+description = "AGH Space Systems Recruitment Task"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "bitstruct",
+    "crccheck",
+    "pyyaml",
+]
+
+[project.scripts]
+ags-proxy = "agh_space_systems.proxy:main"
+ags-simulator = "agh_space_systems.simulator:main"
+ags-example = "agh_space_systems.example:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/communication_library", "src/agh_space_systems"]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.format]
+quote-style = "double"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.17.3",
+]

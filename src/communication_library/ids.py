@@ -48,13 +48,14 @@ class PriorityID(IntEnum):
 
 @unique
 class _ServoOperationID(IntEnum):
-    OPEN = 0x01 # unused, for setting position use POSITION
-    CLOSE = 0x02 # unused, for setting position use POSITION
+    OPEN = 0x01  # unused, for setting position use POSITION
+    CLOSE = 0x02  # unused, for setting position use POSITION
     OPENED_POS = 0x03
     CLOSED_POS = 0x04
     POSITION = 0x05
     DISABLE = 0x06
     RANGE = 0x07
+
 
 @unique
 class _RelayOperationID(IntEnum):
@@ -62,12 +63,14 @@ class _RelayOperationID(IntEnum):
     CLOSE = 0x02
     STATUS = 0x03
 
+
 class _SensorOperationID(IntEnum):
     READ = 0x01
 
+
 class OperationID(Enum):
     SERVO = _ServoOperationID
-    RELAY = _RelayOperationID 
+    RELAY = _RelayOperationID
     SENSOR = _SensorOperationID
 
 
