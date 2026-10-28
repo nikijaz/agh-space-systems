@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field, fields
-from numbers import Number
+from typing import Any, Union
 
 from communication_library import ids
+
+Numeric = Union[int, float]
 
 
 @dataclass(frozen=True, order=True)
@@ -31,19 +33,19 @@ class Frame:
     device_id: int = field(metadata={"bits": 6})
     data_type: int = field(metadata={"bits": 4}, hash=False, compare=False)
     operation: int = field(metadata={"bits": 8})
-    payload: tuple[Number] = field(metadata={"bits": 32}, hash=False, compare=False, default_factory=tuple)
+    payload: tuple[Numeric, ...] = field(metadata={"bits": 32}, hash=False, compare=False, default_factory=tuple)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         for field_name, value in self.as_dict().items():
             if field_name == "payload":
                 self._ensure_payload_type(value)
             else:
                 self._ensure_value_type(field_name, value)
 
-    def as_dict(self) -> dict:
+    def as_dict(self) -> dict[str, Any]:
         return asdict(self)
 
-    def _ensure_payload_type(self, payload: tuple) -> None:
+    def _ensure_payload_type(self, payload: tuple[Numeric, ...]) -> None:
         error_msg = f"{self} has payload of type {type(payload)}"
         assert isinstance(payload, tuple), error_msg
         zero_padding = (0 for _ in range(self._valid_payload_len - len(payload)))
@@ -74,7 +76,7 @@ class Frame:
             raise AssertionError(error_msg + str(err))
 
     @property
-    def data(self) -> Number | tuple[Number, ...]:
+    def data(self) -> Numeric | tuple[Numeric, ...]:
         return self.payload[0] if self._valid_payload_len == 1 else self.payload
 
     @classmethod
@@ -126,7 +128,7 @@ class Frame:
             )
         ).lower()
 
-    def __str__(self):
+    def __str__(self) -> str:
         device_name = ids.DeviceID(self.device_type).name
         return ", ".join(
             (

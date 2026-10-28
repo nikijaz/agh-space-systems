@@ -8,12 +8,14 @@ dependencies = [
     "bitstruct",
     "crccheck",
     "pyyaml",
+    "rich>=15.0.0",
 ]
 
 [project.scripts]
 ags-proxy = "agh_space_systems.proxy:main"
 ags-simulator = "agh_space_systems.simulator:main"
 ags-example = "agh_space_systems.example:main"
+ags-mcc = "agh_space_systems.mission_control:main"
 
 [build-system]
 requires = ["hatchling"]

@@ -1,13 +1,18 @@
 """Entry point for ``python -m agh_space_systems``.
 
-Runs one of the packaged components: proxy, simulator or example.
+Runs one of the packaged components: proxy, simulator, example or mcc.
 """
 
 import sys
 
-from agh_space_systems import example, proxy, simulator
+from agh_space_systems import example, mission_control, proxy, simulator
 
-COMPONENTS = {"proxy": proxy.main, "simulator": simulator.main, "example": example.main}
+COMPONENTS = {
+    "proxy": proxy.main,
+    "simulator": simulator.main,
+    "example": example.main,
+    "mcc": mission_control.main,
+}
 
 
 def main() -> None:
